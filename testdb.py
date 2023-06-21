@@ -8,29 +8,29 @@ import unittest
 
 class TableRecordCountTestCase(unittest.TestCase):
     def setUp(self):
-        self.con = MySQLdb.connect(host="localhost", port=3306, user="root", passwd="root", db="mysql", charset="utf8")
-        self.cur = self.con.cursor()
+        self.con = MySQLdb.connect(host="MySql", port=3306, user="MySql", passwd="MySql", db="MySql", charset="utf8")
+        self.cursor = self.con.cursor()
 
-        self.cur.execute('''CREATE TABLE state (
+        self.cursor.execute('''CREATE TABLE state (
             id INTEGER PRIMARY KEY,
             name VARCHAR(256) NOT NULL
         )''')
 
-        self.cur.execute("INSERT INTO state (name) VALUES ('California')")
-        self.cur.execute("INSERT INTO state (name) VALUES ('Abuja')")
-        self.cur.execute("INSERT INTO state (name) VALUES ('Lagos')")
+        self.cursor.execute("INSERT INTO state (name) VALUES ('California')")
+        self.cursor.execute("INSERT INTO state (name) VALUES ('Abuja')")
+        self.cursor.execute("INSERT INTO state (name) VALUES ('Lagos')")
 
         def test_record_count(self):
         # Execute a query to get the record count
-            self.cur.execute("SELECT COUNT(*) FROM state")
-            count = self.cur.fetchone()[0]
+            self.cursor.execute("SELECT COUNT(*) FROM state")
+            count = self.cursor.fetchall()
 
         # Assert the count matches the expected value
             self.assertEqual(count, 3)
 
         def tearDown(self):
         # Clean up resources
-            self.cur.close()
+            self.cursor.close()
             self.con.close()
 
 if __name__ == '__main__':
