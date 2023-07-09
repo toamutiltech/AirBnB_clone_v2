@@ -3,7 +3,10 @@
 Distributes an archive to my web servers,
 using the function do_deploy
 """
-from fabric.api import *
+from fabric.api import env, run, put, task
+from fabric.context_managers import settings
+from fabric.contrib.files import exists
+import argparse
 from datetime import datetime
 import os
 
